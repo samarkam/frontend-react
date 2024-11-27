@@ -1,4 +1,5 @@
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './components/screen/homePage';
 import React from "react";
@@ -9,8 +10,9 @@ function App() {
     
     <Router>
       <Routes>
-          <Route path="" element={<Login />} />
-          <Route
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
               path="/homePage"
               element={
                 <ProtectedRoute>
