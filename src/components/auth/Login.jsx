@@ -7,7 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // Utilisez useNavigate ici
+  const navigate = useNavigate(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,8 +30,8 @@ const Login = () => {
       }
 
       Cookies.set("jwt_token", data.token, { secure: true, sameSite: "strict" });
+      window.location.href = "/homePage";
 
-      navigate("/HomePage");
     } catch (err) {
       setError(err.message);
     } finally {
