@@ -1,0 +1,78 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif; /* You can customize the font */
+  }
+  
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  nav {
+    width: 100%;
+    background-color: #007BFF; /* Customize as needed */
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+/* Background and styling for side navigation */
+.side-nav {
+  background-color: rgb(229, 237, 240) !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+}
+
+/* Style for menu name */
+.menu-name {
+  font-weight: bold!important;
+  color: #333!important;
+  margin-bottom: 10px!important;
+  text-transform: uppercase!important;
+}
+
+/* Styling for category links */
+.category-link {
+  font-size: 1rem !important;
+  padding: 10px!important;
+  color: #333!important;
+  transition: background-color 0.3s ease, color 0.3s ease!important;
+  border-radius: 4px!important;
+  padding-left: 20px!important;
+}
+
+/* Change color on hover */
+.category-link:hover {
+  color: #0400f4!important;
+}
+
+/* Active category link style */
+.category-link.active {
+  color: #0400f4!important;
+
+}
+
+/* Smooth transition for hover and active state */
+.category-link.active:hover {
+  color: #0056b3!important;
+}
