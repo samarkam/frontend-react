@@ -30,6 +30,8 @@ const Login = () => {
       }
 
       Cookies.set("jwt_token", data.token, { secure: true, sameSite: "strict" });
+      Cookies.remove('user_email');
+      Cookies.set("user_email", email, { expires: 7 }); 
       window.location.href = "/homePage";
 
     } catch (err) {
@@ -41,6 +43,8 @@ const Login = () => {
 
   return (
     <div>
+  <div className="confirm-order-wrapper">
+    <div className="confirm-order-container">
       <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
       <h2>Connexion</h2>
       <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column" }}>
@@ -94,6 +98,8 @@ const Login = () => {
           {isLoading ? "Chargement..." : "Connexion"}
         </button>
       </form>
+    </div>
+    </div>
     </div>
     </div>
   );

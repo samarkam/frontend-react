@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { useShoppingCart} from 'use-shopping-cart';
 
-const CustomCard = ({ articleId, title, text, imgSrc, addToCart }) => {
-  const handleAddToCart = () => {
-    addToCart(articleId);
-  };
+const CustomCard = ({article, articleId, title, text, imgSrc }) => {
+  const [message, setMessage] = useState("");
+  const { addItem } = useShoppingCart();
+  const addToCart = (product) => {
+    const target = {
+    id : product.id,
+    title : product.name,
+    image : product.reference,
+    price : product.prix,
+    quantity : 1
+    };
+    addItem(target);
+    setMessage(`${product.name} has been added to your cart!`);
+        
+    // Clear the message after 3 seconds
+    setTimeout(() => setMessage(""), 3000);
+    };
 
   return (
     <Card style={{ width: '18rem', height: '24rem' }} className="d-flex flex-column justify-content-between align-items-center">
@@ -39,10 +53,11 @@ const CustomCard = ({ articleId, title, text, imgSrc, addToCart }) => {
             fontWeight: 'bold',
              width: '14rem'
           }}
-          onClick={handleAddToCart}
-        >
+          onClick={() => addToCart(article)}>
           <i className="bi bi-cart-plus" style={{ marginRight: '8px' }}></i> Add to Cart
         </Button>
+        {/* Show the message below the buttons */}
+        {message && <div className="mt-3 alert alert-success">{message}</div>}
       </Card.Body>
     </Card>
   );

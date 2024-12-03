@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card } from 'react-bootstrap'
 
 const mainPromoCard = () => {
@@ -7,7 +6,7 @@ const mainPromoCard = () => {
     <Card className="bg-dark text-white">
       <Card.Img   className="img-fluid"
         style={{ maxHeight: '260px' }}
-        src="https://pic.clubic.com/e63250571930575/1200x675/smart/black_friday.jpg" 
+        src="/ambianc.webp" 
         alt="Card image" 
       />
      
