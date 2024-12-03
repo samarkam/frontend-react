@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'; // Install with npm install js-cookie
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,9 @@ const Register = () => {
     setIsLoading(true);
     try {
         await axios.post('http://localhost:8000/api/register', formData);
-        navigate('/');
+        Cookies.set("user_email", formData.email, { expires: 7 }); 
+
+        navigate('/login');
 
     } catch (err) {
       setError(err.message);

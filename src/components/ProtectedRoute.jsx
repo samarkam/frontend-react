@@ -44,7 +44,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (!isValid) {
     Cookies.remove("jwt_token");
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 
   return children;

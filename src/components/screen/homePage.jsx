@@ -13,12 +13,7 @@ const HomePage = () => {
   const [currentCategory, setCurrentCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
-  const [cart, setCart] = useState([]);
-
-  const addToCart = (articleId) => {
-    console.log("addTocart articleId: " + articleId);
-    setCart((prevCart) => [...prevCart, articleId]);
-  };
+ 
   const [openMenus, setOpenMenus] = useState({});
 
   const toggleMenu = (menuId) => {
@@ -115,11 +110,12 @@ const HomePage = () => {
             {currentCards.map((card) => (
               <Col key={card.id} xs={12} sm={6} md={4} lg={3} className="m-4 text-center">
                 <CustomCard
+                  article={card}
+
                   articleId={card.id}
                   title={card.name}
                   text={card.description}
                   imgSrc={card.reference}
-                  addToCart={addToCart}
 
                 />
               </Col>

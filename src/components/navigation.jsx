@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { NavDropdown } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Install with npm install js-cookie
 import { FaUser } from 'react-icons/fa'; // Install with npm install react-icons
+import { useShoppingCart} from 'use-shopping-cart';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+
 
 function Navigation() {
   const [jwtToken, setJwtToken] = useState(null);
+  const { cartCount } = useShoppingCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = Cookies.get('jwt_token');
@@ -32,6 +36,11 @@ function Navigation() {
           >
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/cart"> 
+            <FaShoppingCart style={{ fontSize: '28px', color: 'red' }} />
+
+              <span className="badge badge-secondary">cart{cartCount}</span>
+            </Nav.Link>
           </Nav>
           {/* <div className="mx-auto">
             <Form className="d-flex">
@@ -51,13 +60,19 @@ function Navigation() {
                 <NavDropdown.Divider />
                 <NavDropdown.Item onClick={() => {
                   Cookies.remove('jwt_token');
-                  window.location.reload();
+                  Cookies.remove('user_email');
+                  window.location.href = "/homePage";
                 }}>
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Nav.Link as={Link} to="/">Login</Nav.Link>
+              <>
+                <Nav.Link as={Link} to="login">Login</Nav.Link> 
+                <Nav.Link as={Link} to="/register"> SignIn</Nav.Link>
+              </>
+
+
             )}
           </Nav>
         </Navbar.Collapse>
