@@ -5,22 +5,20 @@ import Col from 'react-bootstrap/Col';
 import Pagination from 'react-bootstrap/Pagination';
 import CustomCard from '../cards/CustomCard';
 import MainPromoCard from '../cards/mainPromoCard';
+import MainSmallPromoCard from '../cards/mainSmallPromoCard';
 import { Nav } from 'react-bootstrap';
 import { FiChevronRight, FiChevronDown } from 'react-icons/fi'; 
 
 const HomePage = () => {
   const [menuData, setMenuData] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentCategory, setCurrentCategory] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
  
-  const [openMenus, setOpenMenus] = useState({});
+  const [openMenus, setOpenMenus] = useState(1);
 
   const toggleMenu = (menuId) => {
-    setOpenMenus((prevState) => ({
-      ...prevState,
-      [menuId]: !prevState[menuId], // Toggle the visibility
-    }));
+    setOpenMenus((prevMenuId) => (prevMenuId === menuId ? null : menuId));
   };
   // Fetch menu data
   useEffect(() => {
@@ -35,7 +33,7 @@ const HomePage = () => {
       }
     };
     fetchMenuData();
-    setCurrentCategory(1);
+    setCurrentCategory(5);
 
   }, []);
 
@@ -64,10 +62,12 @@ const HomePage = () => {
 
   return (
     <Container>
-      <MainPromoCard />
       <Row>
         {/* Side Navigation Menu */}
         <Col xl={3} className="mt-4">
+        <Row>      
+          <MainSmallPromoCard />
+        </Row>
           <Nav className="flex-column side-nav" style={{ minHeight: '30rem' }}>
             {menuData.map((menu) => (
               <Nav.Item key={menu.id}>
@@ -79,13 +79,13 @@ const HomePage = () => {
                 >
                   {/* Arrow Icon */}
                   <span style={{ marginRight: '8px' }}>
-                    {openMenus[menu.id] ? <FiChevronDown /> : <FiChevronRight />}
+                  {openMenus === menu.id ? <FiChevronDown /> : <FiChevronRight />}
                   </span>
                   {menu.name}
                 </Nav.Link>
 
                 {/* Category List - Show/Hide Based on State */}
-                {openMenus[menu.id] && (
+                {openMenus === menu.id && (
                   <div className="category-list">
                     {menu.categories.map((category) => (
                       <Nav.Link
@@ -106,7 +106,11 @@ const HomePage = () => {
 
         {/* Main Content (Cards) */}
         <Col  xl={9} className="mt-4">
-          <Row className="justify-content-center" style={{ minHeight: '30rem'}}>
+        <Row>      
+          <MainPromoCard />
+        </Row>
+          <Row className="justify-content-center" style={{ minHeight: '22rem'}}>
+
             {currentCards.map((card) => (
               <Col key={card.id} xs={12} sm={6} md={4} lg={3} className="m-4 text-center">
                 <CustomCard
@@ -122,9 +126,9 @@ const HomePage = () => {
             ))}
           </Row>
 
-          <Row className="d-flex justify-content-center mt-4">
+          <Row className="d-flex justify-content-center mt-1">
             <Pagination>
-              <Pagination.First onClick={() => handlePageChange(1)} disabled={currentPage === 1} />
+              {/* <Pagination.First onClick={() => handlePageChange(1)} disabled={currentPage === 1} /> */}
               <Pagination.Prev onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item
@@ -136,7 +140,7 @@ const HomePage = () => {
                 </Pagination.Item>
               ))}
               <Pagination.Next onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} />
-              <Pagination.Last onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} />
+              {/* <Pagination.Last onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} /> */}
             </Pagination>
           </Row>
         </Col>

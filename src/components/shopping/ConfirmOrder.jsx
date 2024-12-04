@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import MainExtraSmallPromoCard from '../cards/mainExtraSmallPromoCard';
 
 const ConfirmOrder = () => {
     const { orderId } = useParams(); // Get orderId from URL
@@ -52,9 +53,20 @@ const ConfirmOrder = () => {
     };
 
     return (
-        <div className="confirm-order-wrapper">
+        <div className="confirm-order-wrapper ">
             <div className="confirm-order-container">
-                <h2>Order Confirmation </h2>
+            <Row className="align-items-center ">
+                <Col sm={2} xl={2}>
+                    <MainExtraSmallPromoCard />
+                </Col>
+
+                <Col sm={8} xl={10}>
+                    <h2>Order Confirmation</h2>
+                </Col>
+            </Row>
+
+
+            
 
                 {/* User Details Section */}
                 <div className="user-details">

@@ -31,15 +31,15 @@ function Navigation() {
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
+            style={{ maxHeight: '100px' ,    alignItems :  'center !important'}}
             navbarScroll
           >
             <Nav.Link as={Link} to="/about">About</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
             <Nav.Link as={Link} to="/cart"> 
-            <FaShoppingCart style={{ fontSize: '28px', color: 'red' }} />
+            <FaShoppingCart style={{ fontSize: '20px', color: 'red' }} />
 
-              <span className="badge badge-secondary">cart{cartCount}</span>
+              <span className="badge badge-secondary" style={{ fontSize: '20  px', color: 'red' }} > {cartCount}</span>
             </Nav.Link>
           </Nav>
           {/* <div className="mx-auto">
