@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Col, Row, Modal, Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import MainPromoCard from '../cards/mainPromoCard';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -91,6 +92,8 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
+      <MainPromoCard />
+
       <h2>Shopping Cart</h2>
       {cartCount === 0 ? (
         <div className="cart-empty">

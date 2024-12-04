@@ -1,12 +1,12 @@
 import { Card } from 'react-bootstrap'
 
-const mainPromoCard = () => {
+const mainSmallPromoCard = () => {
   return (
     <div style={{ marginBottom: '1rem' }}>
     <Card className="bg-dark text-white">
       <Card.Img   className="img-fluid"
         style={{ maxHeight: '250px' }}
-        src="/ambianc.webp" 
+        src="/logooo.jpg" 
         alt="Card image" 
       />
      
@@ -15,4 +15,4 @@ const mainPromoCard = () => {
   )
 }
 
-export default mainPromoCard
+export default mainSmallPromoCard
