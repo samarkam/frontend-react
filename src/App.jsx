@@ -12,6 +12,11 @@ import "/styles.css";
 import { CartProvider } from "use-shopping-cart";
 import Cart from './components/shopping/Cart';
 import ConfirmOrder from './components/shopping/ConfirmOrder';
+import MenusList from './components/Menus/MenusList';
+import Listarticles from './components/Articles/Listarticles';
+import Insertarticle from './components/Articles/Insertarticle';
+import Editarticle from './components/Articles/Editarticle';
+import Listarticlescard from './components/Articles/Listarticlescard';
 function App() {
   return (
     <>
@@ -52,7 +57,23 @@ function App() {
               }
             />
             
+            <Route path="/articles" element={<Listarticles/>}/>
+        <Route path="/articles/add" element={<Insertarticle/>}/>
+        <Route path="/articles/edit/:id" element={<Editarticle/>}/>
+        <Route path="/articlescard" element={<Listarticlescard/>}/>
+
+
+                    <Route path="/menus" element={<MenusList />} />
+
+
+
+
+
+
         </Routes>
+
+
+
     </Router>
     
     </CartProvider>

@@ -15,7 +15,7 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 3;
  
-  const [openMenus, setOpenMenus] = useState(1);
+  const [openMenus, setOpenMenus] = useState(5);
 
   const toggleMenu = (menuId) => {
     setOpenMenus((prevMenuId) => (prevMenuId === menuId ? null : menuId));
@@ -25,7 +25,7 @@ const HomePage = () => {
 
     const fetchMenuData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/menu');
+        const response = await fetch('https://localhost:7260/api/Menus');
         const data = await response.json();
         setMenuData(data);
       } catch (error) {
@@ -33,7 +33,7 @@ const HomePage = () => {
       }
     };
     fetchMenuData();
-    setCurrentCategory(5);
+    setCurrentCategory(1);
 
   }, []);
 
@@ -47,7 +47,7 @@ const HomePage = () => {
   const filteredArticles = menuData
     .flatMap(menu => menu.categories)
     .flatMap(category => category.articles)
-    .filter(article => !currentCategory || article.categorieID === currentCategory);
+    .filter(article => !currentCategory || article.categoryId === currentCategory);
 
   // Determine the cards to display on the current page
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -70,31 +70,31 @@ const HomePage = () => {
         </Row>
           <Nav className="flex-column side-nav" style={{ minHeight: '30rem' }}>
             {menuData.map((menu) => (
-              <Nav.Item key={menu.id}>
+              <Nav.Item key={menu.menuId}>
                 {/* Menu Name - Clickable */}
                 <Nav.Link
-                  onClick={() => toggleMenu(menu.id)}
+                  onClick={() => toggleMenu(menu.menuId)}
                   className="menu-name"
                   style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
                 >
                   {/* Arrow Icon */}
                   <span style={{ marginRight: '8px' }}>
-                  {openMenus === menu.id ? <FiChevronDown /> : <FiChevronRight />}
+                  {openMenus === menu.menuId ? <FiChevronDown /> : <FiChevronRight />}
                   </span>
                   {menu.name}
                 </Nav.Link>
 
                 {/* Category List - Show/Hide Based on State */}
-                {openMenus === menu.id && (
+                {openMenus === menu.menuId && (
                   <div className="category-list">
                     {menu.categories.map((category) => (
                       <Nav.Link
-                        key={category.id}
-                        onClick={() => handleCategoryChange(category.id)}
-                        active={currentCategory === category.id}
-                        className={`category-link ${currentCategory === category.id ? 'active' : ''}`}
+                        key={category.categoryId}
+                        onClick={() => handleCategoryChange(category.categoryId)}
+                        active={currentCategory === category.categoryId}
+                        className={`category-link ${currentCategory === category.categoryId ? 'active' : ''}`}
                       >
-                        {category.label}
+                        {category.name}
                       </Nav.Link>
                     ))}
                   </div>

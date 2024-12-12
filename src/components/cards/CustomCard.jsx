@@ -54,7 +54,7 @@ const CustomCard = ({article, articleId, title, text, imgSrc }) => {
              width: '14rem'
           }}
           onClick={() => addToCart(article)}>
-          <i className="bi bi-cart-plus" style={{ marginRight: '8px' }}></i> Add to Cart
+          <i className="bi bi-cart-plus" style={{ marginRight: '8px' }}></i> Add to Card
         </Button>
         {/* Show the message below the buttons */}
         {message && <div className="mt-3 alert alert-success">{message}</div>}

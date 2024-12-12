@@ -5,7 +5,8 @@ import { Col, Row, Modal, Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import MainPromoCard from '../cards/mainPromoCard';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faTrash } from '@fortawesome/free-solid-svg-icons';
 const Cart = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -121,7 +122,7 @@ const Cart = () => {
                     <div>
                       <h3>{cartItem.title}</h3>
                       <button onClick={() => removeItem(cartItem.id)}>
-                        <i className="fa-solid fa-trash-can" style={{ fontSize: "14px", color: "red" }}></i>
+                      <FontAwesomeIcon icon={faTrash} /> 
                       </button>
                     </div>
                   </div>
