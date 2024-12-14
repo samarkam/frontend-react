@@ -70,8 +70,9 @@ function Navigation() {
 
             {isAdmin ? (
               <>
-                <Nav.Link as={Link} to="/articles" style={{fontSize: '23px' ,color:'black'}}>Articles</Nav.Link>
+                <Nav.Link as={Link} to="/articles" style={{fontSize: '23px' ,color:'black'}}>Liste des articles</Nav.Link>
                 <Nav.Link as={Link} to="/menus" style={{fontSize: '23px' ,color:'black'}}>Categories</Nav.Link>
+                <Nav.Link as={Link} to="/orders" style={{fontSize: '23px' ,color:'black'}}>Orders</Nav.Link>
               </>
             ) : (
               <>

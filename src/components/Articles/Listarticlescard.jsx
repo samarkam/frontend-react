@@ -12,7 +12,7 @@ const Listarticlescard = () => {
     const[isLoading,setisLoading]=useState(true)
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [limit, setLimit]=useState(18)
+    const [limit, setLimit]=useState(12)
 
   
     const fetcharticles=async(page,limit)=>{
@@ -54,6 +54,10 @@ const Listarticlescard = () => {
       }
   return (
     <Container>
+      <center>     
+           <h1 className=" mb-4">Liste des articles</h1>
+
+        </center>
     <div className="container">
       <Affichearticles 
       articles={articles}/>

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'; // Import necessary styles from B
 
 const mainPromoCard = () => {
   return (
-    <div style={{ marginBottom: '1rem' }}>
+    <div className="d-none d-lg-block" style={{ marginBottom: '1rem' }}>
       <Card className="bg-light text-white">
         <Card.Img 
           className="img-fluid"

@@ -18,6 +18,7 @@ import Insertarticle from './components/Articles/Insertarticle';
 import Editarticle from './components/Articles/Editarticle';
 import Listarticlescard from './components/Articles/Listarticlescard';
 import ProtectedRouteAdmin from './components/ProtectedRouteAdmin';
+import ListOrders from './components/Orders/ListOrders';
 function App() {
   return (
     <>
@@ -60,9 +61,16 @@ function App() {
 
 
 
+          {/* ADMIN */}
 
-
-
+          <Route
+              path="/orders"
+              element={
+                <ProtectedRouteAdmin>
+                  <ListOrders/>
+                </ProtectedRouteAdmin>
+              }
+            />
             
              <Route
               path="/articles"

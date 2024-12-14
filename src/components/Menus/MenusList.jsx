@@ -100,6 +100,7 @@ const Listcategories = () => {
     try {
       await axios.delete(`https://localhost:7260/api/Categories/${id}`)
       .then(res=>{
+        fetchMenus();
         fetchCategories();
     })
 
