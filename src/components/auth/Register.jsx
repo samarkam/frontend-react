@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'; // Install with npm install js-cookie
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    UserName: "",
     email: "",
     password: "",
     avatar: "https://res.cloudinary.com/iset-sfax/image/upload/v1701446211/images/image.PNG.png", 
@@ -26,7 +26,7 @@ const Register = () => {
     setError("");
     setIsLoading(true);
     try {
-        await axios.post('http://localhost:8000/api/register', formData);
+        await axios.post('https://localhost:7260/api/Auth/register', formData);
         Cookies.set("user_email", formData.email, { expires: 7 }); 
 
         navigate('/login');
@@ -47,12 +47,12 @@ const Register = () => {
 
         {/* Name Field */}
         <div style={styles.formGroup}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="UserName">Name</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="UserName"
+            name="UserName"
+            value={formData.UserName}
             onChange={handleChange}
             required
             style={styles.input}

@@ -17,24 +17,25 @@ const CustomCard = ({ article, articleId, title, text, imgSrc }) => {
     console.log(target);
 
     addItem(target);
-    setMessage(`${product.name} has been added to your cart!`);
+    setMessage(`added to your card!`);
         
     // Clear the message after 3 seconds
     setTimeout(() => setMessage(""), 3000);
   };
 
   return (
-    <div style={{ width: '18rem', height: '24rem' }} className="card d-flex flex-column justify-content-between align-items-center">
+    <div style={{ width: '18rem', height: '28rem' }} className="card d-flex flex-column justify-content-between align-items-center">
       <img
         src={imgSrc}
         alt={title}
         className="card-img-top"
-        style={{ width: '14rem', height: '14rem', objectFit: 'scale-down' }}
+        style={{ width: '10rem', height: '10rem', objectFit: 'scale-down' }}
       />
       <div className="card-body d-flex flex-column align-items-center p-2">
-        <h5
+        <h3
           className="card-title text-center"
           style={{
+            fontSize:'20px',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -44,8 +45,8 @@ const CustomCard = ({ article, articleId, title, text, imgSrc }) => {
           }}
         >
           {title}
-        </h5>
-        <p className="card-text">{text}</p>
+        </h3>
+        <p className="card-text">price : {text} TND</p>
         <Button
           variant="success"
           className="w-75 mt-2 rounded-pill shadow-lg"

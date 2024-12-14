@@ -48,6 +48,10 @@ const Cart = () => {
 
   const handleProfileUpdate = () => {
     console.log(userProfile)
+    if (!userProfile.address || !userProfile.phoneNumber) {
+      alert("Address and Phone Number are required fields and cannot be empty or null.");
+      return; 
+     }
     try {
          axios.put(`https://localhost:7260/api/UserProfile/${user.userId}`, {
           
@@ -65,23 +69,23 @@ const Cart = () => {
 
     if (user) {
       const orderData = {
-        user_id: user.id,
-        total_amount: totalPrice,
-        order_details: Object.values(cartDetails).map(cartItem => {
-          console.log('Sending article_id:', cartItem.id); // Debug log
+        UserId: user.userId,
+        TotalPrice: totalPrice,
+        OrderDetails: Object.values(cartDetails).map(cartItem => {
+          console.log('Sending article:', cartItem); // Debug log
           return {
-            article_id: cartItem.id,  // Ensure this is the correct ID from the cart item
-            quantity: cartItem.quantity,
-            price: cartItem.price,
+            ArticleId: cartItem.id,  
+            Quantity: cartItem.quantity,
+            Price: cartItem.price,
           };
         })
       };
-    
-      axios.post("http://127.0.0.1:8000/api/orders", orderData)
+    console.log(orderData);
+      axios.post("https://localhost:7260/api/Orders", orderData)
         .then(response => {
           clearCart();
-          const orderId = response.data.order.id;
-          console.log(response.data.order.id)
+          const orderId = response.data.orderId;
+          console.log(response.data)
           navigate(`/confirmOrder/${orderId}`);
         })
         .catch(err => {

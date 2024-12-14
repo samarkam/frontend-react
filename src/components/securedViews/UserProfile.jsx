@@ -31,14 +31,14 @@ const UserProfile = () => {
                   { email }
               );
   
-              const userData = response.data.user;
+              const userData = response.data;
               console.log(response.data)
               setUser(userData);
               setFormData({
-                  Name: userData.userName || "",
-                  Email: userData.email || "",
-                  PhoneNumber: response.data.phoneNumber || "",
-                  Address: response.data.address || "",
+                  Name: userData.user.userName || "",
+                  Email: userData.user.email || "",
+                  PhoneNumber: userData.phoneNumber || "",
+                  Address: userData.address || "",
               });
   
               return userData; 
@@ -50,10 +50,10 @@ const UserProfile = () => {
       const fetchOrders = async (userId) => {
           try {
               const response = await axios.get(
-                  `http://127.0.0.1:8000/api/orders/user/${userId}`
+                  `https://localhost:7260/api/Orders/user/${userId}`
               );
-              setOrders(response.data.orders || []);
-              console.log("Orders fetched");
+              setOrders(response.data || []);
+              console.log(response.data);
           } catch (err) {
               console.error("Error fetching order data:", err);
           } finally {
@@ -65,8 +65,9 @@ const UserProfile = () => {
           setLoading(true);
           setOrdersLoading(true);
           const userData = await fetchUserData(); 
-          if (userData && userData.UserId) {
-              await fetchOrders(userData.UserId); 
+          console.log(userData.userId)
+          if (userData && userData.userId) {
+              await fetchOrders(userData.userId); 
           }
           setLoading(false);
           setOrdersLoading(false);
@@ -190,14 +191,14 @@ const UserProfile = () => {
                                 </thead>
                                 <tbody>
                                     {orders.map((order, index) => (
-                                        <tr key={order.id} style={{ padding:'10px'}}>
+                                        <tr key={order.orderId} style={{ padding:'10px'}}>
                                             <td>{index + 1}</td> {/* Sequential number starting at 1 */}
-                                            <td><button onClick={() => openOrderById(order.id)} style={{ backgroundColor: '#0B5ED7',color : 'white', borderRadius:'5px'  }}>Check Order</button></td>
-                                            <td>{new Date(order.order_date).toLocaleString()}</td>
-                                            <td>{parseFloat(order.total_amount).toFixed(2)} TND</td>
+                                            <td><button onClick={() => openOrderById(order.orderId)} style={{ backgroundColor: '#0B5ED7',color : 'white', borderRadius:'5px'  }}>Check Order</button></td>
+                                            <td>{new Date(order.orderDate).toLocaleString()}</td>
+                                            <td>{parseFloat(order.totalPrice).toFixed(2)} TND</td>
                                             <td style={{textAlign: 'justify'}}>
-                                                {order.order_details.map((detail, idx) => (
-                                                    <div key={idx}>
+                                                {order.orderDetails.map((detail, idx) => (
+                                                    <div key={detail.orderDetailId}>
                                                         - {detail.article.name} x {detail.quantity} 
                                                         (Unit Price: {parseFloat(detail.price).toFixed(2)} TND)
                                                     </div>

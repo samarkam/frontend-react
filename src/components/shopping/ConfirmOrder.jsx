@@ -20,8 +20,8 @@ const ConfirmOrder = () => {
         } else {
             const fetchUserData = async () => {
                 try {
-                    const response = await axios.post("http://127.0.0.1:8000/api/user-details", { email });
-                    setUser(response.data.user);
+                    const response = await axios.post("https://localhost:7260/api/Users/getByEmail", { email });
+                    setUser(response.data);
                 } catch (err) {
                     console.error("Error fetching user data:", err);
                 } finally {
@@ -34,7 +34,7 @@ const ConfirmOrder = () => {
 
         const fetchOrderData = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/orders/${orderId}`);
+                const response = await axios.get(`https://localhost:7260/api/Orders/${orderId}`);
                 setOrder(response.data); // Store order details in the state
             } catch (err) {
                 console.error("Error fetching order data:", err);
@@ -83,19 +83,19 @@ const ConfirmOrder = () => {
                                 </Col>
                                 <Col xl={6}>
                                     <p>
-                                        <strong>Email:</strong> {user.email}
+                                        <strong>Email:</strong> {user.user.email}
                                     </p>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xl={6}>
                                     <p>
-                                        <strong>Phone Number:</strong> {user.profile?.phone_number}
+                                        <strong>Phone Number:</strong> {user.phoneNumber}
                                     </p>
                                 </Col>
                                 <Col xl={6}>
                                     <p>
-                                        <strong>Address:</strong> {user.profile?.address}
+                                        <strong>Address:</strong> {user.address}
                                     </p>
                                 </Col>
                             </Row>
@@ -109,7 +109,7 @@ const ConfirmOrder = () => {
                 {order ? (
                     <>
                         <div className="order-summary">
-                            <h3>Order Summary</h3> <span>order date : {order.order_date}</span>
+                            <h3>Order Summary</h3> <span>order date : {order.orderDate}</span>
                             <table className="order-table">
                                 <thead>
                                     <tr>
@@ -120,8 +120,8 @@ const ConfirmOrder = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {order.order_details.map((item) => (
-                                        <tr key={item.id}>
+                                    {order.orderDetails.map((item) => (
+                                        <tr key={item.orderDetailId}>
                                             <td>{item.article.name}</td>
                                             <td>{item.quantity}</td>
                                             <td>{item.price} TND</td>
@@ -132,7 +132,7 @@ const ConfirmOrder = () => {
                             </table>
                         </div>
                         <div className="order-total">
-                            <h4>Total Price: {order.total_amount} TND</h4>
+                            <h4>Total Price: {order.totalPrice} TND</h4>
                         </div>
 
                         {/* Print Button */}

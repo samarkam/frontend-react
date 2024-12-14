@@ -112,13 +112,13 @@ const HomePage = () => {
           <Row className="justify-content-center" style={{ minHeight: '22rem'}}>
 
             {currentCards.map((card) => (
-              <Col key={card.articleId} xs={12} sm={6} md={4} lg={3} className="m-4 text-center">
+              <Col key={card.articleId} xs={12} sm={6} md={4} lg={3} className="m-4 text-center" >
                 <CustomCard
                   article={card}
 
                   articleId={card.articleId}
                   title={card.name}
-                  text={card.name}
+                  text={card.price}
                   imgSrc={card.reference}
 
                 />
