@@ -7,7 +7,7 @@ const Contact = () => {
     <Container className="mt-5">
       <Row className="justify-content-center">
         <Col lg={8}>
-          <Card className="p-4 shadow-sm">
+          <Card className="p-4 shadow-sm" style={{minHeight: '500px'}}   >
             <Card.Body>
             <Row className="align-items-center ">
                 <Col sm={2} xl={2}>

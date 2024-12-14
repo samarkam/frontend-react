@@ -8,10 +8,10 @@ const UserProfile = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone_number: "",
-        address: "",
+        Name: "",
+        Email: "",
+        PhoneNumber: "",
+        Address: "",
     });
     const [orders, setOrders] = useState([]);
     const [ordersLoading, setOrdersLoading] = useState(true);
@@ -27,18 +27,18 @@ const UserProfile = () => {
               }
   
               const response = await axios.post(
-                  "http://127.0.0.1:8000/api/user-details",
+                  "https://localhost:7260/api/Users/getByEmail",
                   { email }
               );
   
               const userData = response.data.user;
-              console.log(userData)
+              console.log(response.data)
               setUser(userData);
               setFormData({
-                  name: userData.name || "",
-                  email: userData.email || "",
-                  phone_number: userData.profile?.phone_number || "",
-                  address: userData.profile?.address || "",
+                  Name: userData.userName || "",
+                  Email: userData.email || "",
+                  PhoneNumber: response.data.phoneNumber || "",
+                  Address: response.data.address || "",
               });
   
               return userData; 
@@ -65,8 +65,8 @@ const UserProfile = () => {
           setLoading(true);
           setOrdersLoading(true);
           const userData = await fetchUserData(); 
-          if (userData && userData.id) {
-              await fetchOrders(userData.id); 
+          if (userData && userData.UserId) {
+              await fetchOrders(userData.UserId); 
           }
           setLoading(false);
           setOrdersLoading(false);
@@ -85,9 +85,13 @@ const UserProfile = () => {
     };
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
+        console.log(user)
+        console.log("Payload sent:", formData);
+
         try {
-            await axios.put(`http://127.0.0.1:8000/api/update-user/${user.id}`, formData);
+            await axios.put(`https://localhost:7260/api/UserProfile/${user.userId}`, formData);
             alert("Profile updated successfully!");
         } catch (err) {
             console.error("Error updating user data:", err);
@@ -107,12 +111,12 @@ const UserProfile = () => {
                         <Row className="mb-3">
                             <Col md={6}>
                                 <div className="form-group">
-                                    <label htmlFor="name">Name:</label>
+                                    <label htmlFor="Name">Name:</label>
                                     <input
                                         type="text"
-                                        id="name"
-                                        name="name"
-                                        value={formData.name}
+                                        id="Name"
+                                        name="Name"
+                                        value={formData.Name}
                                         onChange={handleInputChange}
                                         className="form-control"
                                     />
@@ -120,12 +124,12 @@ const UserProfile = () => {
                             </Col>
                             <Col md={6}>
                                 <div className="form-group">
-                                    <label htmlFor="email">Email:</label>
+                                    <label htmlFor="Email">Email:</label>
                                     <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={formData.email}
+                                        type="Email"
+                                        id="Email"
+                                        name="Email"
+                                        value={formData.Email}
                                         readOnly
                                         className="form-control"
                                     />
@@ -135,12 +139,12 @@ const UserProfile = () => {
                         <Row className="mb-3">
                             <Col md={6}>
                                 <div className="form-group">
-                                    <label htmlFor="phone_number">Phone Number:</label>
+                                    <label htmlFor="PhoneNumber">Phone Number:</label>
                                     <input
                                         type="text"
-                                        id="phone_number"
-                                        name="phone_number"
-                                        value={formData.phone_number}
+                                        id="PhoneNumber"
+                                        name="PhoneNumber"
+                                        value={formData.PhoneNumber}
                                         onChange={handleInputChange}
                                         className="form-control"
                                     />
@@ -148,12 +152,12 @@ const UserProfile = () => {
                             </Col>
                             <Col md={6}>
                                 <div className="form-group">
-                                    <label htmlFor="address">Address:</label>
+                                    <label htmlFor="Address">Address:</label>
                                     <input
                                         type="text"
-                                        id="address"
-                                        name="address"
-                                        value={formData.address}
+                                        id="Address"
+                                        name="Address"
+                                        value={formData.Address}
                                         onChange={handleInputChange}
                                         className="form-control"
                                     />

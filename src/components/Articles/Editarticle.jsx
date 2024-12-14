@@ -62,11 +62,26 @@ const loadarticle=async()=>{
         onChange={(e)=>setArticle({...article,name:e.target.value})}
         />
       </Form.Group>
+
+      <Form.Group as={Col} md="6" >
+        <Form.Label>catégorie</Form.Label>
+        <Form.Control 
+        type="select"
+        as="select"
+        placeholder="Sous catégorie" 
+        value={article.categoryId}
+        onChange={(e)=>setArticle({...article,categoryId:e.target.value})}
+        >
+            {
+              scategories.map((scat,index)=>
+              <option key={scat.categoryId} value={scat.categoryId}>{scat.name}</option>
+              )
+            }
+
+          </Form.Control>
+      </Form.Group>
       </Row>
-      <Row className="mb-2">
-      
-      
-      </Row>
+     
         <Row className="mb-2">
       <Form.Group as={Col} md="6" >
         <Form.Label>Prix</Form.Label>
@@ -88,25 +103,7 @@ const loadarticle=async()=>{
       </Form.Group>
 
       </Row>
-     <Row className="mb-2">
-      <Form.Group as={Col} md="6" >
-        <Form.Label>catégorie</Form.Label>
-        <Form.Control 
-        type="select"
-        as="select"
-        placeholder="Sous catégorie" 
-        value={article.categoryId}
-        onChange={(e)=>setArticle({...article,categoryId:e.target.value})}
-        >
-            {
-              scategories.map((scat,index)=>
-              <option key={scat.categoryId} value={scat.categoryId}>{scat.name}</option>
-              )
-            }
-
-          </Form.Control>
-      </Form.Group>
-      </Row>
+    
       <div className="d-flex justify-content-end" >
         <button className="btn btn-success btn-sm" onClick={(e)=>handleSave(e)}><FontAwesomeIcon icon={faFloppyDisk} /> Enregistrer</button>
         &nbsp;

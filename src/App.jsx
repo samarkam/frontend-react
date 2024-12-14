@@ -17,6 +17,7 @@ import Listarticles from './components/Articles/Listarticles';
 import Insertarticle from './components/Articles/Insertarticle';
 import Editarticle from './components/Articles/Editarticle';
 import Listarticlescard from './components/Articles/Listarticlescard';
+import ProtectedRouteAdmin from './components/ProtectedRouteAdmin';
 function App() {
   return (
     <>
@@ -48,7 +49,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-      <Route
+    <Route
               path="/cart"
               element={
                 <ProtectedRoute>
@@ -56,14 +57,55 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+
+
+
+
+
             
-            <Route path="/articles" element={<Listarticles/>}/>
-        <Route path="/articles/add" element={<Insertarticle/>}/>
-        <Route path="/articles/edit/:id" element={<Editarticle/>}/>
-        <Route path="/articlescard" element={<Listarticlescard/>}/>
+             <Route
+              path="/articles"
+              element={
+                <ProtectedRouteAdmin>
+                  <Listarticles/>
+                </ProtectedRouteAdmin>
+              }
+            />
+             <Route
+              path="/articles/add"
+              element={
+                <ProtectedRouteAdmin>
+                  <Insertarticle/>
+                </ProtectedRouteAdmin>
+              }
+            />
+             <Route
+              path="/articles/edit/:id"
+              element={
+                <ProtectedRouteAdmin>
+                  <Editarticle/>
+                </ProtectedRouteAdmin>
+              }
+            />
+             <Route
+              path="/articlescard"
+              element={
+                <ProtectedRouteAdmin>
+                  <Listarticlescard/>
+                </ProtectedRouteAdmin>
+              }
+            />
+            <Route
+              path="/menus"
+              element={
+                <ProtectedRouteAdmin>
+                  <MenusList/>
+                </ProtectedRouteAdmin>
+              }
+            />
+      
 
-
-                    <Route path="/menus" element={<MenusList />} />
 
 
 

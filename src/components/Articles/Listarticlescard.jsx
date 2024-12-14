@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import ReactLoading from 'react-loading';
 import Affichearticles from "./Affichearticles";
 import Pagination from "./Pagination";
+import { Container } from "react-bootstrap";
 
 
 
@@ -52,7 +53,7 @@ const Listarticlescard = () => {
         )
       }
   return (
-    <>
+    <Container>
     <div className="container">
       <Affichearticles 
       articles={articles}/>
@@ -68,7 +69,7 @@ const Listarticlescard = () => {
 
 
 
-    </>
+    </Container>
   )
 }
 

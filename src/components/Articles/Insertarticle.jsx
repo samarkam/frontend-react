@@ -10,7 +10,7 @@ const Insertarticle = () => {
   const[article,setArticle]=useState({})
   const[scategories,setScategories]=useState([])
   const [files, setFiles] = useState([]);
-  
+  const[errorMessage,setErrorMessage]= useState("");
   const navigate=useNavigate()
   const fetchscategories=async()=>{
     try {
@@ -27,44 +27,33 @@ const Insertarticle = () => {
   },[])
 
   const handleSave=async(e)=>{
-    try {
-      e.preventDefault()
-      await axios.post("https://localhost:7260/api/Articles",article)
-      .then(res=>{
-        navigate("/articles")
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const serverOptions = () => { 
-    return {
-    process: (fieldName, file, metadata, load, error, progress, abort) => {
-    
-    const data = new FormData();
-    data.append('file', file);
-    data.append('upload_preset', 'iit2025S1');
-    data.append('cloud_name', 'esps');
-data.append('publicid', file.name);
-axios.post('https://api.cloudinary.com/v1_1/esps/image/upload', data)
-.then((response) => response.data)
-.then((data) => {
+    e.preventDefault()
 
-setArticle({...article,imageart:data.url}) ;
-load(data);
-})
-.catch((error) => {
-console.error('Error uploading file:', error);
-error('Upload failed');
-abort();
-});
-},
-};
-};
+    if(article.categoryId == null){
+      setErrorMessage("Categorie n'est pas ajoutée!");
+      
+    }else{
+      try {
+        await axios.post("https://localhost:7260/api/Articles",article)
+        .then(res=>{
+          navigate("/articles")
+        })
+      } catch ( error) {
+        setErrorMessage(error);
+  
+        console.log(error)
+      }
+
+    }
+   
+  }
+
   return (
     <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
     <center><h2>Insérer un article</h2></center>
       <Form>
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+
       <Row className="mb-2">
       
       <Form.Group as={Col} md="6" >
@@ -75,6 +64,25 @@ abort();
         value={article.name}
         onChange={(e)=>setArticle({...article,name:e.target.value})}
         />
+      </Form.Group>
+      <Form.Group as={Col} md="6" >
+        <Form.Label>catégorie</Form.Label>
+        <Form.Control 
+        type="select"
+        as="select"
+        placeholder="Sous catégorie" 
+        value={article.categoryId}
+        onChange={(e)=>setArticle({...article,categoryId:e.target.value})}
+        >
+             <option key={null} >selectCategory</option>
+
+            {
+              scategories.map((scat,index)=>
+              <option key={scat.categoryId} value={scat.categoryId}>{scat.name}</option>
+            )
+            }
+
+          </Form.Control>
       </Form.Group>
       </Row>
       <Row className="mb-2">
@@ -102,25 +110,7 @@ abort();
       </Form.Group>
 
       </Row>
-     <Row className="mb-2">
-      <Form.Group as={Col} md="6" >
-        <Form.Label>catégorie</Form.Label>
-        <Form.Control 
-        type="select"
-        as="select"
-        placeholder="Sous catégorie" 
-        value={article.categoryId}
-        onChange={(e)=>setArticle({...article,categoryId:e.target.value})}
-        >
-            {
-              scategories.map((scat,index)=>
-              <option value={scat.id}>{scat.name}</option>
-              )
-            }
-
-          </Form.Control>
-      </Form.Group>
-      </Row>
+     
       <div className="d-flex justify-content-end" >
         <button className="btn btn-success btn-sm" onClick={(e)=>handleSave(e)}><FontAwesomeIcon icon={faFloppyDisk} /> Enregistrer</button>
         &nbsp;

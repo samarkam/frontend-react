@@ -27,7 +27,7 @@ const Listarticles = () => {
     try {
       await axios.delete(`https://localhost:7260/api/Articles/${id}`)
       .then(res=>{
-        setArticles(articles.filter(art=>art.id!=id))
+        setArticles(articles.filter(art=>art.articleId!=id))
       })
 
     } catch (error) {

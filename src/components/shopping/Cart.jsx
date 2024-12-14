@@ -20,15 +20,15 @@ const Cart = () => {
     const email = Cookies.get("user_email");
 
     if (token) {
-         axios.post("http://127.0.0.1:8000/api/user-details", { email })
+         axios.post("https://localhost:7260/api/Users/getByEmail", { email })
         .then(response => {
+          console.log(response.data)
           const userData = response.data.user; // Get user data from the response
           setUser(userData); // Update the user state
-          const profile = userData.profile;
-          console.log(userData.profile)
+          
           setUserProfile({
-            phoneNumber: profile?.phone_number            || '',
-            address: profile?.address || ''
+            phoneNumber: response.data.phoneNumber            || '',
+            address: response.data.address || ''
           });
           setShowModal(true);
         })
@@ -47,12 +47,14 @@ const Cart = () => {
   const handleModalClose = () => setShowModal(false);
 
   const handleProfileUpdate = () => {
+    console.log(userProfile)
     try {
-         axios.put(`http://127.0.0.1:8000/api/update-user/${user.id}`, {
-            'name' : user.name,
-            'email' : user.email,
-            'address' : userProfile.address,
-            'phone_number':userProfile.phoneNumber
+         axios.put(`https://localhost:7260/api/UserProfile/${user.userId}`, {
+          
+            'Name' : user.userName,
+            'Email' : user.email,
+            'Address' : userProfile.address,
+            'PhoneNumber':userProfile.phoneNumber
 
         });
         alert("Profile updated successfully!");

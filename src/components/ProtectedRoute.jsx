@@ -16,10 +16,12 @@ const ProtectedRoute = ({ children }) => {
       }
 
       try {
-        const response = await fetch("http://localhost:8000/api/validate-token", {
+        const response = await fetch("https://localhost:7260/api/Auth/validate-token", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Origin": "http://localhost:5173",
+
             Authorization: `Bearer ${token}`,
           },
         });
@@ -46,6 +48,7 @@ const ProtectedRoute = ({ children }) => {
     Cookies.remove("jwt_token");
     return <Navigate to="/login" />;
   }
+
 
   return children;
 };
